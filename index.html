@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<!-- Some code snippets in this project were adapted from the following sources: -->
+<!-- Bootstrap 5 Starter Template: https://getbootstrap.com/docs/5.0/getting-started/introduction/ -->
+
+<html lang="en">
+
+    <head>
+        <!-- Required Meta Tags -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Load Favicons -->
+        <!-- Generated with https://realfavicongenerator.net/ -->
+        <!-- Icon from https://www.flaticon.com/free-icons/funfair -->
+        <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+        <link rel="manifest" href="img/site.webmanifest">
+        <link rel="mask-icon" href="img/safari-pinned-tab.svg" color="#272827">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#f7f7f7">
+
+        <!-- Load CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+        <link rel="stylesheet" href="css/styles.css">
+
+        <!-- Site Information -->
+        <title>U.S. Amusement Park Accidents</title>
+        <meta name="description" content="Exploratory dashboard for Saferides RiDES Database of accidents at U.S. water and amusement parks.">
+    </head>
+
+    <body>
+
+        <!-- Start Page Content -->
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div class="col-auto px-0">
+                    <div id="sidebar" class="collapse collapse-horizontal show border-end">
+                        <div id="sidebar-nav" class="flex list-group border-0 rounded-0 text-sm-start min-vh-100">
+                            <h3 class="sidebar-header">Accidents at U.S. Water and Amusement Parks</h3>
+                            <p class="instructions">
+                                Use the control below to adjust the map and graphs at right. Accident totals represent all reported incidents in 2016, the most recent year for which complete data are available.
+                            </p>
+                            <div class="dropdown">
+                                <h6 class="filterlabel">Sort States By...</h6>
+                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Availability of Data (Reports)
+                                </a>
+                              
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                  <li><a class="dropdown-item" id="incidents_total" href="#">Availability of Data (Reports)</a></li>                                    
+                                  <li><a class="dropdown-item" id="injured_total" href="#">Number Reported Injured</a></li>
+                                  <li><a class="dropdown-item" id="cause_mechanical" href="#">Accidents Caused by Mechanical Failure</a></li>
+                                  <li><a class="dropdown-item" id="cause_operator" href="#">Accidents Caused by Operator Error</a></li>
+                                  <li><a class="dropdown-item" id="cause_employee" href="#">Accidents Caused by Park Employee</a></li>
+                                </ul>
+                            </div>
+                            <div class="datanotebox">
+                                <p class="datanote">
+                                    Data acquired from <a href="https://ridesdatabase.org/saferparks/data/" target="_blank">Saferparks RiDES dataset</a>. For more information about sources and limitations of data, <a href="https://ridesdatabase.org/wp-content/uploads/2020/02/Saferparks-data-description.pdf" target="_blank">review database documentation</a> or <a href="https://ridesdatabase.org/saferparks/regulations/" target="_blank">regulatory information</a>.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container col-9">
+                    <div class="d-flex justify-content-between">
+                        <div class="col ps-md-2 pt-2 barcolumn1">
+                            <div class="menubuttonbox">
+                                <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" class="border rounded-3 p-1 text-decoration-none menu-button"><i class="bi bi-list bi-lg py-2 p-1"></i>Toggle Sidebar</a>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row-reverse">
+                            <div class="ps-md-2 pt-2 menubuttonbox">
+                                <a href="https://ridesdatabase.org/saferparks/safety-tips/" target="_blank" class="navbaritem">Safety Info</a>
+                            </div>
+                            <div class="ps-md-2 pt-2 menubuttonbox">
+                                <a href="https://ridesdatabase.org/saferparks/data/" target="_blank" class="navbaritem">Source</a>
+                            </div>
+                            <div class="ps-md-2 pt-2 menubuttonbox">
+                                <a href="https://ridesdatabase.org/saferparks/regulations/" target="_blank" class="navbaritem">About</a>
+                            </div>
+                        </div>
+                    </div>
+                <div class="row" id="maprow">
+                    <div class="col-md chart mapdiv">
+                        map area
+                    </div>
+                </div>
+                <div class="row" id="vizrow">
+                    <div class="col-md chart bardiv">
+                        bar chart area
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Page Content -->
+
+        <!-- Load Javascript -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+        <script src="https://unpkg.com/topojson@3"></script>    
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="js/main.js" async defer></script>
+    </body>
+
+</html>

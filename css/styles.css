@@ -1,0 +1,137 @@
+/* Define Color Variables */
+:root {
+    --red: #c5050c;
+    --dark-red: #9b0000;
+    --offwhite: #f7f7f7;
+    --greyblue: #dadfe1;
+    --black: #494949;
+}
+
+body {
+    background: var(--greyblue);
+}
+
+/* Navbar Styles */
+#sidebar-nav {
+    background-color: var(--black);
+    padding: 10px;
+    height: 100vh;
+}
+
+.sidebar-header {
+    margin: 20px;
+    max-width: 9em;
+    color: var(--offwhite);
+}
+
+.dropdown {
+    margin: 20px;
+}
+
+h6 {
+    color: var(--offwhite);
+}
+
+.dropdown-toggle {
+    background-color: var(--offwhite);
+    color: var(--black);
+}
+
+.dropdown-item.selected {
+    background-color: #adadad;
+}
+
+.menu-button {
+    background-color: var(--offwhite);
+}
+
+.barcolumn1 {
+    margin-left: 0px;
+}
+
+.menubuttonbox {
+    padding: 10px;
+    overflow: auto;
+    white-space: nowrap;
+    padding-left: 0px;
+}
+
+.instructions {
+    padding: 20px;
+    padding-top: 0px;
+    max-width: 20em;
+    color: var(--offwhite);
+    font-size: medium;
+}
+
+.datanote {
+    padding: 10px;
+    max-width: 25em;
+    color: #adadad;
+    font-size: small;
+    font-style: italic;
+    position: absolute;
+    bottom: 0;
+    align-self: flex-end;
+    width: 100%;
+}
+
+
+@media only screen and (max-width: 600px) {
+
+    .datanote {
+        display: none;
+    }
+}
+
+.datanote a {
+    color: #adadad;
+}
+
+/* Content Styles */
+
+.navbaritem {
+    color: #494949;
+    text-decoration: none;
+}
+
+.chart {
+    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+}
+svg.map {
+    width: 100%;
+    height: 100%;
+}
+.state {
+    fill: #FFF;
+    stroke: #CCC;
+    stroke-width: 2px;
+}
+
+.infolabel {
+    position: absolute;
+    margin: 0px;
+    padding: 10px;
+    background-color: var(--greyblue);
+    line-height: 1em;
+    height: 2.5em;
+}
+
+.labelname {
+    margin: 0px;
+    padding: 0px;
+}
+
+.bardiv {
+    padding: 10px;
+}
+
+text.chartTitle {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #494949;
+
+}
